@@ -1,0 +1,6 @@
+# Runtime deps for the container (heuristic scorer; add torch to use a trained GNN checkpoint)
+numpy>=1.24
+networkx>=3.0
+pyyaml>=6.0
+fastapi>=0.110
+uvicorn[standard]>=0.27

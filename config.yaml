@@ -1,0 +1,73 @@
+# MuleNet-Graph configuration. ALL DATA IS SYNTHETIC.
+seed: 42
+
+stream:
+  backend: inprocess        # inprocess | kafka | redis  (kafka/redis = optional adapters, not required)
+  queue_maxsize: 10000
+  kafka: {bootstrap_servers: "localhost:9092", topic: "upi-txns"}
+  redis: {url: "redis://localhost:6379/0"}
+
+graph:
+  window_seconds: 600       # rolling window of recent edges
+  k_hops: 2                 # sub-graph radius (2-3 per ideation doc)
+  max_subgraph_nodes: 64    # bound for latency
+
+data:                       # Phase 1 (synthetic)
+  horizon_seconds: 21600    # 6 simulated hours
+  n_accounts: 2000
+  n_merchants: 100
+  n_normal_txns: 20000
+  n_rings: 20
+  n_hard_negatives: 40
+  hard_negative_types: [shopkeeper, group_split, rent, salary, friend_settle]
+  mule_ring:
+    size: [5, 12]           # mule accounts per ring (excl. victims, cash-out)
+    depth: [2, 4]           # layers (fan_out/fan_in) or laps+1 (circular)
+    hop_gap_seconds: [2, 30]
+    split_ratio: [0.2, 0.6] # fan_out only: share sent to a parent's primary child
+    skim: [0.02, 0.05]      # fraction kept per hop
+    amount: [20000, 200000] # total INR injected by victims
+    camouflage_txns: [0, 3] # benign-looking payments per mule
+    patterns: [fan_out, fan_in, circular]
+
+model:                      # used from Phase 3
+  arch: graphsage           # graphsage | gat
+  hidden_dim: 32
+  prefer_pyg: true          # falls back to pure PyTorch if PyG is missing
+  checkpoint: checkpoints/mulenet.pt
+
+policy:                     # used from Phase 4 (thresholds adjustable in UI)
+  monitor_below: 0.30
+  flag_at: 0.30
+  hold_at: 0.60
+  freeze_at: 0.85           # freeze = recommend + escalate; human review assumed
+
+latency_target_ms: 50       # benchmark under stated simulated load only
+
+baseline:                   # Phase 2 rule thresholds (simple, untuned)
+  rule_amount: 15000
+  rule_fwd_ratio: 0.85
+  rule_gap_s: 60
+  rule_fanout: 8
+  rule_fanin: 8
+  flag_threshold: 0.5
+
+train:                      # Phase 3 (synthetic)
+  epochs: 25
+  batch_size: 64
+  lr: 0.005
+  n_train_rings: 60         # separate datasets: train seed 1, val seed 2, test = default cfg seed 42
+  n_train_hard_negatives: 100
+  max_normal_events: 4000   # normal-event samples per dataset (all ring/hard-neg events are kept)
+  min_hn_fpr_budget: 0.10   # threshold pick: best val F1 with hard-neg group FPR <= this
+
+sim:                        # Phase 4 live simulator (SYNTHETIC)
+  tick_s: 0.2               # wall-clock tick
+  speed: 20                 # simulated seconds per wall second
+  normal_rate: 1.5          # normal txns per simulated second
+  chunk_s: 300              # traffic generated this far ahead
+  hardneg_every_s: 600      # mean simulated seconds between hard-negative scenarios
+
+api:
+  cors_origins: ["*"]       # tighten for public deploy
+  static_dir: frontend/dist # built dashboard (Phase 5) is served from here if present

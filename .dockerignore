@@ -1,0 +1,6 @@
+.git
+__pycache__
+*.zip
+frontend/node_modules
+data/generated
+.venv

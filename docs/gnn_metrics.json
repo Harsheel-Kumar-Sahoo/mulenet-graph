@@ -1,0 +1,117 @@
+{
+ "synthetic": true,
+ "backend": "pure",
+ "arch": "graphsage",
+ "threshold": 0.95,
+ "quick_mode": false,
+ "gnn": {
+  "node": {
+   "tp": 189,
+   "fp": 5,
+   "fn": 1,
+   "tn": 1957,
+   "precision": 0.9742268041237113,
+   "recall": 0.9947368421052631,
+   "f1": 0.984375,
+   "fpr_all_nonmule": 0.0025484199796126403
+  },
+  "hard_negative": {
+   "fpr_nodes": 0.0029282576866764276,
+   "fpr_groups": 0.05,
+   "fpr_groups_by_type": {
+    "shopkeeper": 0.125,
+    "group_split": 0.0,
+    "rent": 0.0,
+    "salary": 0.0,
+    "friend_settle": 0.125
+   }
+  },
+  "ring": {
+   "n_rings": 20,
+   "recall_before_cashout": 1.0,
+   "detected_only_after_cashout": 0,
+   "delay_s_before_cashout_mean": 96.12185000000004,
+   "delay_s_before_cashout_median": 32.48400000000015,
+   "recall_by_pattern": {
+    "fan_out": 1.0,
+    "fan_in": 1.0,
+    "circular": 1.0
+   }
+  },
+  "replay_seconds": 42.5
+ },
+ "baselines": {
+  "single_account_rules": {
+   "node": {
+    "tp": 116,
+    "fp": 17,
+    "fn": 74,
+    "tn": 1945,
+    "precision": 0.8721804511278195,
+    "recall": 0.6105263157894737,
+    "f1": 0.7182662538699691,
+    "fpr_all_nonmule": 0.008664627930682976
+   },
+   "hard_negative": {
+    "fpr_nodes": 0.020497803806734993,
+    "fpr_groups": 0.325,
+    "fpr_groups_by_type": {
+     "shopkeeper": 0.625,
+     "group_split": 0.0,
+     "rent": 0.0,
+     "salary": 1.0,
+     "friend_settle": 0.0
+    }
+   },
+   "ring": {
+    "n_rings": 20,
+    "recall_before_cashout": 1.0,
+    "detected_only_after_cashout": 0,
+    "delay_s_before_cashout_mean": 92.16394999999993,
+    "delay_s_before_cashout_median": 27.006500000000415,
+    "recall_by_pattern": {
+     "fan_out": 1.0,
+     "fan_in": 1.0,
+     "circular": 1.0
+    }
+   },
+   "replay_seconds": 0.6
+  },
+  "graph_heuristic": {
+   "node": {
+    "tp": 158,
+    "fp": 4,
+    "fn": 32,
+    "tn": 1958,
+    "precision": 0.9753086419753086,
+    "recall": 0.8315789473684211,
+    "f1": 0.8977272727272727,
+    "fpr_all_nonmule": 0.0020387359836901123
+   },
+   "hard_negative": {
+    "fpr_nodes": 0.0014641288433382138,
+    "fpr_groups": 0.025,
+    "fpr_groups_by_type": {
+     "shopkeeper": 0.0,
+     "group_split": 0.0,
+     "rent": 0.0,
+     "salary": 0.125,
+     "friend_settle": 0.0
+    }
+   },
+   "ring": {
+    "n_rings": 20,
+    "recall_before_cashout": 1.0,
+    "detected_only_after_cashout": 0,
+    "delay_s_before_cashout_mean": 83.27749999999996,
+    "delay_s_before_cashout_median": 23.991500000000087,
+    "recall_by_pattern": {
+     "fan_out": 1.0,
+     "fan_in": 1.0,
+     "circular": 1.0
+    }
+   },
+   "replay_seconds": 0.6
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "synthetic": true,
+ "summary": {
+  "n_txns": 21393,
+  "n_accounts": 2152,
+  "n_mule_txns": 325,
+  "n_mule_accounts": 190,
+  "rings_by_pattern": {
+   "fan_out": 7,
+   "fan_in": 7,
+   "circular": 6
+  },
+  "hardneg_by_type": {
+   "shopkeeper": 8,
+   "group_split": 8,
+   "rent": 8,
+   "salary": 8,
+   "friend_settle": 8
+  },
+  "txns_by_scenario": {
+   "normal": 20000,
+   "ring": 325,
+   "ring_camouflage": 262,
+   "hardneg": 806
+  }
+ },
+ "seed": 42,
+ "single_account_rules": {
+  "node": {
+   "tp": 116,
+   "fp": 17,
+   "fn": 74,
+   "tn": 1945,
+   "precision": 0.8721804511278195,
+   "recall": 0.6105263157894737,
+   "f1": 0.7182662538699691,
+   "fpr_all_nonmule": 0.008664627930682976
+  },
+  "hard_negative": {
+   "fpr_nodes": 0.020497803806734993,
+   "fpr_groups": 0.325,
+   "fpr_groups_by_type": {
+    "shopkeeper": 0.625,
+    "group_split": 0.0,
+    "rent": 0.0,
+    "salary": 1.0,
+    "friend_settle": 0.0
+   }
+  },
+  "ring": {
+   "n_rings": 20,
+   "recall_before_cashout": 1.0,
+   "detected_only_after_cashout": 0,
+   "delay_s_before_cashout_mean": 92.16394999999993,
+   "delay_s_before_cashout_median": 27.006500000000415,
+   "recall_by_pattern": {
+    "fan_out": 1.0,
+    "fan_in": 1.0,
+    "circular": 1.0
+   }
+  },
+  "replay_seconds": 0.6
+ },
+ "graph_heuristic": {
+  "node": {
+   "tp": 158,
+   "fp": 4,
+   "fn": 32,
+   "tn": 1958,
+   "precision": 0.9753086419753086,
+   "recall": 0.8315789473684211,
+   "f1": 0.8977272727272727,
+   "fpr_all_nonmule": 0.0020387359836901123
+  },
+  "hard_negative": {
+   "fpr_nodes": 0.0014641288433382138,
+   "fpr_groups": 0.025,
+   "fpr_groups_by_type": {
+    "shopkeeper": 0.0,
+    "group_split": 0.0,
+    "rent": 0.0,
+    "salary": 0.125,
+    "friend_settle": 0.0
+   }
+  },
+  "ring": {
+   "n_rings": 20,
+   "recall_before_cashout": 1.0,
+   "detected_only_after_cashout": 0,
+   "delay_s_before_cashout_mean": 83.27749999999996,
+   "delay_s_before_cashout_median": 23.991500000000087,
+   "recall_by_pattern": {
+    "fan_out": 1.0,
+    "fan_in": 1.0,
+    "circular": 1.0
+   }
+  },
+  "replay_seconds": 0.6
+ }
+}

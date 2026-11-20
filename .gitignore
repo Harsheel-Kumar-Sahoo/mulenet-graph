@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+*.zip
+data/*.parquet
+data/large/
+checkpoints/*.pt
+!checkpoints/.gitkeep
+data/generated/
